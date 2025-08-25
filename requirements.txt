@@ -1,0 +1,58 @@
+# Multilingual Sentiment Analysis Pipeline - Dependencies
+# Optimized based on actual codebase usage analysis
+
+# ================================================================
+# CORE APPLICATION DEPENDENCIES
+# ================================================================
+
+# Flask Web Framework
+Flask>=2.3.0,<3.0.0
+flask-cors>=4.0.0,<5.0.0
+Werkzeug>=2.3.0,<3.0.0
+
+# Environment Management
+python-dotenv>=1.0.0,<2.0.0
+
+# AI/ML Integration
+ollama>=0.1.7,<1.0.0
+
+# Language Detection & Processing
+langdetect>=1.0.9,<2.0.0
+
+# File Processing & Validation
+python-magic>=0.4.27,<1.0.0
+python-magic-bin>=0.4.14,<1.0.0  # Windows compatibility
+
+# ================================================================
+# DEVELOPMENT & TESTING DEPENDENCIES
+# ================================================================
+
+# Testing Framework
+pytest>=7.4.0,<8.0.0
+pytest-flask>=1.2.0,<2.0.0
+pytest-cov>=4.1.0,<5.0.0
+
+# ================================================================
+# REMOVED DEPENDENCIES (Previously Unused)
+# ================================================================
+# numpy - Not found in any import statements
+# requests - Not used in current implementation  
+# uuid - Python standard library (not needed)
+
+# ================================================================
+# FEATURES
+# ================================================================
+# This configuration provides:
+# - Enhanced performance through OptimizedSentimentService
+# - Advanced tokenization and caching via TokenizationService
+# - Multilingual support for 40+ languages
+# - Professional-grade error handling and validation
+# - Comprehensive test coverage
+
+# ================================================================
+# INSTALLATION NOTES
+# ================================================================
+# For development: pip install -r requirements.txt
+# For production: Consider pinning to exact versions
+# Windows users: python-magic-bin provides libmagic compatibility
+# Ollama requires API key configuration in .env file

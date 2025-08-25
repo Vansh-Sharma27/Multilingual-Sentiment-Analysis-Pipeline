@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Sentiment Analysis Pipeline</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">
+                    <i class="fas fa-language"></i>
+                    Multilingual Sentiment Analysis Pipeline
+                </h1>
+                <p class="subtitle">Analyze sentiment across multiple languages with AI-powered insights</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-tabs">
+                    <button class="tab-button active" data-tab="text">
+                        <i class="fas fa-keyboard"></i>
+                        Text Input
+                    </button>
+                    <button class="tab-button" data-tab="file">
+                        <i class="fas fa-file-upload"></i>
+                        File Upload
+                    </button>
+                </div>
+
+                <!-- Text Input Tab -->
+                <div class="tab-content active" id="text-tab">
+                    <div class="input-card">
+                        <h2 class="section-title">Enter Your Text</h2>
+                        <div class="input-group">
+                            <textarea 
+                                id="text-input" 
+                                class="text-input" 
+                                placeholder="Type or paste your text here for sentiment analysis..."
+                                rows="8"
+                            ></textarea>
+                            <div class="input-info">
+                                <span class="char-count">0 / 5000 characters</span>
+                                <span class="detected-language">Language: Auto-detect</span>
+                            </div>
+                        </div>
+                        <div class="analysis-buttons">
+                            <button id="analyze-text-btn" class="primary-btn">
+                                <i class="fas fa-chart-line"></i>
+                                Analyze Sentiment
+                            </button>
+                            <button id="enhanced-analyze-btn" class="secondary-btn enhanced-btn">
+                                <i class="fas fa-brain"></i>
+                                Enhanced Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Upload Tab -->
+                <div class="tab-content" id="file-tab">
+                    <div class="input-card">
+                        <h2 class="section-title">Upload Your File</h2>
+                        <div class="upload-area" id="upload-area">
+                            <input type="file" id="file-input" accept=".json,.csv" hidden>
+                            <div class="upload-content">
+                                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                <h3>Drag & Drop your file here</h3>
+                                <p>or</p>
+                                <button class="secondary-btn" id="browse-btn">Browse Files</button>
+                                <p class="upload-info">Supported formats: JSON, CSV (Max size: 2MB)</p>
+                            </div>
+                        </div>
+                        <div class="file-info" id="file-info" style="display: none;">
+                            <div class="file-details">
+                                <i class="fas fa-file-alt"></i>
+                                <div class="file-meta">
+                                    <span class="file-name"></span>
+                                    <span class="file-size"></span>
+                                </div>
+                                <button class="remove-file-btn" id="remove-file">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button id="analyze-file-btn" class="primary-btn" disabled>
+                            <i class="fas fa-chart-line"></i>
+                            Analyze File
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Indicator -->
+            <div class="loading-overlay" id="loading-overlay" style="display: none;">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <h3>Processing Your Request</h3>
+                    <p id="loading-message">Detecting language...</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section" style="display: none;">
+                <h2 class="section-title">
+                    <i class="fas fa-poll"></i>
+                    Analysis Results
+                </h2>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="card-icon positive">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Positive</h3>
+                            <p class="percentage" id="positive-percent">0%</p>
+                            <p class="count" id="positive-count">0 reviews</p>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="card-icon neutral">
+                            <i class="fas fa-meh"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Neutral</h3>
+                            <p class="percentage" id="neutral-percent">0%</p>
+                            <p class="count" id="neutral-count">0 reviews</p>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="card-icon negative">
+                            <i class="fas fa-frown"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Negative</h3>
+                            <p class="percentage" id="negative-percent">0%</p>
+                            <p class="count" id="negative-count">0 reviews</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentiment Chart -->
+                <div class="chart-container">
+                    <h3>Sentiment Distribution</h3>
+                    <div class="chart">
+                        <canvas id="sentiment-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Detailed Results -->
+                <div class="detailed-results">
+                    <div class="results-header">
+                        <h3>Detailed Analysis</h3>
+                        <div class="results-actions">
+                            <button class="icon-btn" id="filter-btn">
+                                <i class="fas fa-filter"></i>
+                                Filter
+                            </button>
+                            <button class="icon-btn" id="export-btn">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Navigation -->
+                    <div class="results-navigation" id="results-navigation" style="display: none;">
+                        <div class="nav-info">
+                            <span class="current-page">Showing <span id="current-range">1-10</span> of <span id="total-results">0</span> reviews</span>
+                        </div>
+                        <div class="nav-controls">
+                            <button class="nav-btn" id="prev-page-btn" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                                Previous
+                            </button>
+                            <div class="page-indicator">
+                                <span id="current-page-num">1</span> / <span id="total-pages">1</span>
+                            </div>
+                            <button class="nav-btn" id="next-page-btn" disabled>
+                                Next
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filter Options -->
+                    <div class="filter-options" id="filter-options" style="display: none;">
+                        <label class="filter-label">
+                            <input type="checkbox" value="positive" checked> Positive
+                        </label>
+                        <label class="filter-label">
+                            <input type="checkbox" value="neutral" checked> Neutral
+                        </label>
+                        <label class="filter-label">
+                            <input type="checkbox" value="negative" checked> Negative
+                        </label>
+                    </div>
+
+                    <div class="results-table" id="results-table">
+                        <!-- Results will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <!-- AI Insights -->
+                <div class="ai-insights" id="ai-insights" style="display: none;">
+                    <div class="insights-header">
+                        <h3>
+                            <i class="fas fa-brain"></i>
+                            AI-Generated Insights
+                        </h3>
+                        <button class="icon-btn" id="export-insights-btn">
+                            <i class="fas fa-download"></i>
+                            Export Insights
+                        </button>
+                    </div>
+                    <div class="insights-content" id="insights-content">
+                        <!-- Insights will be dynamically inserted here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Display -->
+            <div class="error-message" id="error-message" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <p id="error-text"></p>
+                <button class="close-error" id="close-error">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Multilingual Sentiment Analysis Pipeline | Powered by Ollama GPT OSS-120B</p>
+                <div class="team-credit">
+                    <span class="team-label">Project By</span>
+                    <span class="team-name">Team G93</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

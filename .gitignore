@@ -1,0 +1,255 @@
+# Multilingual Sentiment Analysis Pipeline - .gitignore
+
+# ================================================================
+# PYTHON SPECIFIC
+# ================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# ================================================================
+# APPLICATION SPECIFIC
+# ================================================================
+
+# Environment variables and secrets
+.env
+.env.local
+.env.development
+.env.production
+*.key
+secrets.json
+
+# API Keys and sensitive data
+*api_key*
+*secret*
+*token*
+credentials/
+
+# Logs
+*.log
+logs/
+app.log
+error.log
+
+# Database files
+*.db
+*.sqlite3
+
+# Uploads and temporary files
+app/static/uploads/*
+frontend/uploads/*
+temp/
+tmp/
+*.tmp
+
+# Cache files
+.cache/
+cache/
+*.cache
+
+# ================================================================
+# DEVELOPMENT TOOLS
+# ================================================================
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# ================================================================
+# SYSTEM AND OS FILES
+# ================================================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.nfs*
+
+# ================================================================
+# BACKUP AND TEMPORARY FILES
+# ================================================================
+
+# Backup files
+*.bak
+*.backup
+*.old
+*backup*
+*old*
+
+# Temporary processing files
+processing_*
+temp_*
+*.tmp
+*.temp
+
+# Archive files (unless specifically needed for testing)
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# ================================================================
+# DOCUMENTATION BUILD ARTIFACTS
+# ================================================================
+
+# Sphinx documentation
+docs/_build/
+docs/build/
+
+# mkdocs documentation
+site/
+
+# ================================================================
+# SECURITY AND SAFETY
+# ================================================================
+
+# Never commit these sensitive patterns
+*password*
+*secret*
+*private*
+*key*
+*token*
+*credential*
+*.pem
+*.p12
+*.pfx
+
+# Configuration with potential secrets
+config.ini
+config.yaml
+config.json
+local_settings.py
+
+# ================================================================
+# PERFORMANCE AND ANALYSIS
+# ================================================================
+
+# Profiling data
+*.prof
+*.lprof
+
+# Memory dumps
+*.dump
+*.dmp
+
+# ================================================================
+# MODEL AND DATA FILES (if large)
+# ================================================================
+
+# Large model files (comment out if needed for testing)
+# *.model
+# *.pkl
+# *.joblib
+
+# Large datasets (preserve test files for now)
+# large_*.csv
+# large_*.json
+
+# ================================================================
+# DOCKER AND CONTAINERS
+# ================================================================
+
+# Docker
+.dockerignore
+Dockerfile.prod
+docker-compose.override.yml
+
+# ================================================================
+# CI/CD
+# ================================================================
+
+# GitHub Actions (keep main workflows)
+# .github/workflows/
+
+# Other CI files
+.travis.yml
+.circleci/
+.gitlab-ci.yml
+
+# ================================================================
+# NOTES
+# ================================================================
+# This .gitignore is optimized for the Multilingual Sentiment Analysis Pipeline
+# It protects sensitive data while preserving necessary test files
+# Test files in test_files/ are intentionally tracked for development
+# Modify as needed for production deployment
